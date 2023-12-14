@@ -35,6 +35,7 @@ namespace Flight_Document_V1.Entity
             this.SeedGroup(modelBuilder);
             this.SeedAccount(modelBuilder);
             this.SeedSetting(modelBuilder);
+            this.SeedDocumentType(modelBuilder);
         }
 
         private void SeedRoles(ModelBuilder builder)
@@ -96,6 +97,26 @@ namespace Flight_Document_V1.Entity
                 AccountID = 1,
             });
 
+        }
+
+        private void SeedDocumentType(ModelBuilder builder)
+        {
+            builder.Entity<DocumentType>().HasData(new DocumentType()
+            {
+                DocumentTypeID = 1,
+                DocumentTypeName = "Load Summary"
+            });
+
+            builder.Entity<DocumentType>().HasData(new DocumentType()
+            {
+                DocumentTypeID = 2,
+                DocumentTypeName = "Summary"
+            });
+            builder.Entity<DocumentType>().HasData(new DocumentType()
+            {
+                DocumentTypeID = 3,
+                DocumentTypeName = "Loading Instruction"
+            });
         }
     }
 }
