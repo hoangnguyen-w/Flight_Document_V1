@@ -4,6 +4,7 @@ using Flight_Document_V1.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Flight_Document_V1.Migrations
 {
     [DbContext(typeof(FlightManagerContext))]
-    partial class FlightManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20231219083509_updateDocumentFile")]
+    partial class updateDocumentFile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,11 +117,8 @@ namespace Flight_Document_V1.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdateDateDocument")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Version")
-                        .HasColumnType("float");
+                    b.Property<float>("Version")
+                        .HasColumnType("real");
 
                     b.HasKey("DocumentID");
 
@@ -229,7 +228,7 @@ namespace Flight_Document_V1.Migrations
                         new
                         {
                             GroupID = 1,
-                            CreateDateGroup = new DateTime(2023, 12, 19, 15, 51, 23, 178, DateTimeKind.Local).AddTicks(9833),
+                            CreateDateGroup = new DateTime(2023, 12, 19, 15, 35, 9, 575, DateTimeKind.Local).AddTicks(6118),
                             Creator = "DEV",
                             GroupName = "GroupAdmin",
                             Note = "Đây là Group đầu tiên tạo ra cho Database"

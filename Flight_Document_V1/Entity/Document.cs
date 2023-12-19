@@ -14,15 +14,18 @@ namespace Flight_Document_V1.Entity
         [MaxLength(100)]
         public string DocumentName { get; set; }
 
-        public float Version { get; set; }
+        public double Version { get; set; }
 
         public string Note { get; set; }
 
 
         [Required]
-        public byte[] DocumentFile { get; set; }
+        public string DocumentFile { get; set; }
 
         public DateTime CreateDateDocument { get; set; }
+
+        public DateTime? UpdateDateDocument { get; set; }
+
 
         [ForeignKey("DocumentType")]
         public int DocumentTypeID { get; set; }
@@ -32,7 +35,6 @@ namespace Flight_Document_V1.Entity
         [ForeignKey("Flight")]
         public string FlightNo { get; set; }
         public virtual Flight Flight { get; set; }
-
 
         public virtual ICollection<Group> Groups { get; set; }
     }
