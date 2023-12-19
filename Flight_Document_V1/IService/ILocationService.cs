@@ -8,6 +8,7 @@ namespace Flight_Document_V1.IService
         Task<List<Location>> GetAll();
         Task<List<Location>> GetByName(string name);
         Task<List<Location>> FindByID(int id);
+        Task<Location> FindIDToResult(int id);
         Task CreateLocation(LocationDTO locationDTO);
         Task EditLocation(int id, LocationDTO locationDTO);
         Task DeleteLocation(int id);

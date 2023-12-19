@@ -66,6 +66,14 @@ namespace Flight_Document_V1.Service
             return acc;*/
         }
 
+
+        public async Task<Account> FindIDToResult(int id)
+        {
+            var acc = await _context.Accounts.FindAsync(id);
+            return acc;
+        }
+
+
         public async Task CreateAccount(RegisterAccountDTO accDTO)
         {
 

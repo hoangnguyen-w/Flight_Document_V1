@@ -38,6 +38,13 @@ namespace Flight_Document_V1.Service
             return acc;
         }
 
+        public async Task<DocumentType> FindIDReturnResult(int id)
+        {
+            var acc = await _context.DocumentTypes.FindAsync(id);
+            return acc;
+        }
+
+
         public async Task CreateDocumentType(DocumentTypeDTO documentTypeDTO)
         {
 
@@ -54,6 +61,11 @@ namespace Flight_Document_V1.Service
         {
 
             var document = await _context.DocumentTypes.FirstOrDefaultAsync(l => l.DocumentTypeID == id);
+
+            if(document == null)
+            {
+                return;
+            }
 
             document.DocumentTypeName = documentTypeDTO.DocumentTypeName;
 

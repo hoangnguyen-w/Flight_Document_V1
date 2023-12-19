@@ -79,7 +79,7 @@ namespace Flight_Document_V1.Controllers
             }
         }
 
-        //[Authorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         [HttpPost("Create")]
         public async Task<ActionResult> CreatDocumentType(DocumentTypeDTO documentTypeDTO)
         {
@@ -93,13 +93,19 @@ namespace Flight_Document_V1.Controllers
                 return BadRequest(e.Message);
             }
         }
-        //[Authorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         [HttpPut("Update/{id}")]
         public async Task<ActionResult> EditDocumentType(int id, DocumentTypeDTO documentTypeDTO)
         {
             try
             {
+                var tmp = await _documentTypeService.FindIDReturnResult(id);
+                if(tmp == null )
+                {
+                    return NotFound();
+                }
                 await _documentTypeService.EditDocumentType(id, documentTypeDTO);
+
                 return Ok(documentTypeDTO);
             }
             catch (Exception e)
@@ -107,13 +113,18 @@ namespace Flight_Document_V1.Controllers
                 return BadRequest(e.Message);
             }
         }
-        //[Authorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete/{id}")]
         public async Task<ActionResult> DeleteDocumentType(int id)
         {
             try
             {
-                var list = await _documentTypeService.FindByID(id);
+                var list = await _documentTypeService.FindIDReturnResult(id);
+
+                if(list == null)
+                {
+                    return NotFound();
+                }
 
                 await _documentTypeService.DeleteDocumentType(id);
 

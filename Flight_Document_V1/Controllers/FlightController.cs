@@ -8,21 +8,23 @@ namespace Flight_Document_V1.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class GroupController : Controller
+    public class FlightController : Controller
     {
-        private readonly IGroupService _groupService;
 
-        public GroupController(IGroupService groupService)
+        private readonly IFlightService _flightService;
+
+        public FlightController(IFlightService flightService)
+
         {
-            _groupService = groupService;
+            _flightService = flightService;
         }
 
         [HttpGet("Get")]
-        public async Task<ActionResult<List<Group>>> GetAll()
+        public async Task<ActionResult<List<Flight>>> GetAll()
         {
             try
             {
-                var list = await _groupService.GetAll();
+                var list = await _flightService.GetAll();
 
                 if (list == null)
                 {
@@ -30,27 +32,6 @@ namespace Flight_Document_V1.Controllers
                 }
 
                 return Ok(list);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
-        [HttpGet("GetByName/{name}")]
-        public async Task<ActionResult<List<Group>>> GetName(string name)
-        {
-            try
-            {
-                var list = await _groupService.GetByName(name);
-
-                if (list == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(list);
-
             }
             catch (Exception e)
             {
@@ -59,11 +40,11 @@ namespace Flight_Document_V1.Controllers
         }
 
         [HttpGet("GetById/{id}")]
-        public async Task<ActionResult<Group>> GetId(int id)
+        public async Task<ActionResult<Flight>> GetId(string id)
         {
             try
             {
-                var list = await _groupService.FindByID(id);
+                var list = await _flightService.FindByID(id);
 
                 if (list == null)
                 {
@@ -80,12 +61,12 @@ namespace Flight_Document_V1.Controllers
 
         [Authorize(Roles = "Admin, Staff")]
         [HttpPost("Create")]
-        public async Task<ActionResult> CreateGroup(GroupDTO groupDTO)
+        public async Task<ActionResult> CreateFlight(CreateFlightDTO createFlightDTO)
         {
             try
             {
-                await _groupService.CreateGroup(groupDTO);
-                return Ok(groupDTO);
+                await _flightService.CreateFlight(createFlightDTO);
+                return Ok(createFlightDTO);
             }
             catch (Exception e)
             {
@@ -94,38 +75,37 @@ namespace Flight_Document_V1.Controllers
         }
         [Authorize(Roles = "Admin, Staff")]
         [HttpPut("Update/{id}")]
-        public async Task<ActionResult> EditGroup(int id, GroupDTO groupDTO)
+        public async Task<ActionResult> EditFlight(string id, FlightDTO flightDTO)
         {
             try
             {
-                var list = await _groupService.FindIDToResult(id);
+                var list = await _flightService.FindIDToResult(id);
                 if (list == null)
                 {
                     return NotFound();
                 }
-                await _groupService.EditGroup(id, groupDTO);
-                return Ok(groupDTO);
+
+                await _flightService.EditFlight(id, flightDTO);
+                return Ok();
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Staff")]
         [HttpDelete("Delete/{id}")]
-        public async Task<ActionResult> DeleteGroup(int id)
+        public async Task<ActionResult> DeleteFlight(string id)
         {
             try
             {
-                var list = await _groupService.FindIDToResult(id);
-
+                var list = await _flightService.FindIDToResult(id);
                 if (list == null)
                 {
                     return NotFound();
                 }
 
-
-                await _groupService.DeleteGroup(id);
+                await _flightService.DeleteFlight(id);
 
                 return Ok(list);
             }

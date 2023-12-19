@@ -33,8 +33,8 @@ namespace Flight_Document_V1.Service
 
         public async Task<List<Location>> FindByID(int id)
         {
-            var acc = await _context.Locations.Where(l => l.LocationID == id).ToListAsync();
-            return acc;
+            var loca = await _context.Locations.Where(l => l.LocationID == id).ToListAsync();
+            return loca;
         }
 
         public async Task CreateLocation(LocationDTO locationDTO)
@@ -67,6 +67,12 @@ namespace Flight_Document_V1.Service
             _context.Remove(loca);
             await _context.SaveChangesAsync();
 
+        }
+
+        public async Task<Location> FindIDToResult(int id)
+        {
+            var list = await _context.Locations.FindAsync(id);
+            return list;
         }
     }
 }

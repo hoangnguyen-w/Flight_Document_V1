@@ -7,6 +7,7 @@ namespace Flight_Document_V1.IService
     {
         Task<List<GroupPermission>> GetAll();
         Task<List<GroupPermission>> FindByID(int id);
+        Task<GroupPermission> FindIDToResult(int id);
         Task CreateGroupPermission(GroupPermissionDTO groupPermissionDTO);
         Task EditGroupPermission(int id, GroupPermissionDTO groupPermissionDTO);
         Task DeleteGroupPermission(int id);

@@ -76,5 +76,11 @@ namespace Flight_Document_V1.Service
             await _context.SaveChangesAsync();
 
         }
+
+        public async Task<Group> FindIDToResult(int id)
+        {
+            var acc = await _context.Groups.FindAsync(id);
+            return acc;
+        }
     }
 }

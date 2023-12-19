@@ -8,7 +8,7 @@ namespace Flight_Document_V1.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin, Staff")]
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
@@ -132,7 +132,11 @@ namespace Flight_Document_V1.Controllers
         {
             try
             {
-                var list = await _accountService.FindByID(id);
+                var list = await _accountService.FindIDToResult(id);
+                if (list == null)
+                {
+                    return NotFound();
+                }
 
                 await _accountService.ChangeStatusAccount(id);
                 return Ok(list);
@@ -149,7 +153,11 @@ namespace Flight_Document_V1.Controllers
         {
             try
             {
-                var list = await _accountService.FindByID(id);
+                var list = await _accountService.FindIDToResult(id);
+                if(list == null)
+                {
+                    return NotFound();
+                }
 
                 await _accountService.DeleteAccount(id);
 

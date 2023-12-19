@@ -99,6 +99,12 @@ namespace Flight_Document_V1.Controllers
         {
             try
             {
+                var list = await _locationService.FindIDToResult(id);
+                if(list == null)
+                {
+                    return NotFound();
+                }
+
                 await _locationService.EditLocation(id, locationDTO);
                 return Ok(locationDTO);
             }
@@ -113,7 +119,11 @@ namespace Flight_Document_V1.Controllers
         {
             try
             {
-                var list = await _locationService.FindByID(id);
+                var list = await _locationService.FindIDToResult(id);
+                if (list == null)
+                {
+                    return NotFound();
+                }
 
                 await _locationService.DeleteLocation(id);
 

@@ -38,6 +38,7 @@ namespace Flight_Document_V1.Controllers
                 
                 dto.Email = acc.Email;  
                 dto.AccountName = acc.AccountName;
+                dto.AccountID = acc.AccountID;
                 dto.Token = token;
                 dto.Role = acc.Role.RoleName;
 

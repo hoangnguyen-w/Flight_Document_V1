@@ -21,6 +21,22 @@ namespace Flight_Document_V1.Service
         {
 
             var list = await _context.GroupPermissions.ToListAsync();
+            /*foreach (var item in list)
+            {
+                string name;
+                switch (item.StatusPermission)
+                {
+                    case 1:
+                        name = "Read and Modify";
+                        break;
+                    case 2:
+                        name = "Read Only";
+                        break;
+                    case 3:
+                        name = "No Permission";
+                        break;
+                }
+            }*/
             return list;
 
         }
@@ -65,6 +81,12 @@ namespace Flight_Document_V1.Service
             _context.Remove(gr);
             await _context.SaveChangesAsync();
 
+        }
+
+        public async Task<GroupPermission> FindIDToResult(int id)
+        {
+            var list = await _context.GroupPermissions.FindAsync(id);
+            return list;
         }
     }
 }

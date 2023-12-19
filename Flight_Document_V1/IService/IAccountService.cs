@@ -13,6 +13,8 @@ namespace Flight_Document_V1.IService
 
         Task<List<Account>> FindByID(int id);
 
+        Task<Account> FindIDToResult(int id);
+
         Task CreateAccount(RegisterAccountDTO accDTO);
 
         Task EditAccount(int id, AccountDTO accDTO);

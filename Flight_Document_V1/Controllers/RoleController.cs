@@ -99,6 +99,11 @@ namespace Flight_Document_V1.Controllers
         {
             try
             {
+                var list = await _roleService.FindIDToResult(id);
+                if (list == null)
+                {
+                    return NotFound();
+                }
                 await _roleService.EditRole(id, roleDTO);
                 return Ok(roleDTO);
             }
@@ -113,7 +118,11 @@ namespace Flight_Document_V1.Controllers
         {
             try
             {
-                var list = await _roleService.FindByID(id);
+                var list = await _roleService.FindIDToResult(id);
+                if(list == null)
+                {
+                    return NotFound();
+                }
 
                 await _roleService.DeleteRole(id);
 

@@ -1,6 +1,7 @@
 ﻿using Flight_Document_V1.DTO;
 using Flight_Document_V1.Entity;
 using Flight_Document_V1.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flight_Document_V1.Controllers
@@ -27,7 +28,6 @@ namespace Flight_Document_V1.Controllers
                 {
                     return NotFound();
                 }
-
                 return Ok(list);
             }
             catch (Exception e)
@@ -56,7 +56,7 @@ namespace Flight_Document_V1.Controllers
             }
         }
 
-        //[Authorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         [HttpPost("Create")]
         public async Task<ActionResult> CreateGroupPermission(GroupPermissionDTO groupPermissionDTO)
         {
@@ -70,12 +70,18 @@ namespace Flight_Document_V1.Controllers
                 return BadRequest(e.Message);
             }
         }
-        //[Authorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin, Staff")]
         [HttpPut("Update/{id}")]
         public async Task<ActionResult> EditGroupPermission(int id, GroupPermissionDTO groupPermissionDTO)
         {
             try
             {
+                var list = await _groupPermissionService.FindIDToResult(id);
+
+                if (list == null)
+                {
+                    return NotFound();
+                }
                 await _groupPermissionService.EditGroupPermission(id, groupPermissionDTO);
                 return Ok(groupPermissionDTO);
             }
@@ -84,13 +90,19 @@ namespace Flight_Document_V1.Controllers
                 return BadRequest(e.Message);
             }
         }
-        //[Authorize(Roles = "Admin, Staff")]
+        [Authorize(Roles = "Admin")]
         [HttpDelete("Delete/{id}")]
         public async Task<ActionResult> DeleteDocumentType(int id)
         {
             try
             {
-                var list = await _groupPermissionService.FindByID(id);
+                var list = await _groupPermissionService.FindIDToResult(id);
+
+                if (list == null)
+                {
+                    return NotFound();
+                }
+
 
                 await _groupPermissionService.DeleteGroupPermission(id);
 

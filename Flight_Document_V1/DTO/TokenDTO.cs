@@ -3,6 +3,7 @@
 {
     public class TokenDTO
     {
+        public int AccountID { get; set; }
         public string AccountName { get; set; }
 
         public string Email { get; set; }
