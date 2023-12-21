@@ -6,7 +6,7 @@ namespace Flight_Document_V1.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
     public class SettingController : Controller
     {
         private readonly ISettingService _settingService;

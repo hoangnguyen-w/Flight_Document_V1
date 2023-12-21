@@ -37,5 +37,7 @@ namespace Flight_Document_V1.Entity
         public virtual Flight Flight { get; set; }
 
         public virtual ICollection<Group> Groups { get; set; }
+
+        public virtual ICollection<History> Histories { get; set; }
     }
 }

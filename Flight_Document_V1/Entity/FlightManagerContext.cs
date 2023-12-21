@@ -22,6 +22,8 @@ namespace Flight_Document_V1.Entity
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<History> Histories { get; set; }
+
         public FlightManagerContext(DbContextOptions options) : base(options)
         {
         }

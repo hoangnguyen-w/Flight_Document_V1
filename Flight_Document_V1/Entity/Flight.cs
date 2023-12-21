@@ -27,6 +27,6 @@ namespace Flight_Document_V1.Entity
 
         public int SecondLocationID { get; set; }
 
-        public virtual ICollection<Document> Documents { get; set; }
+        //public virtual ICollection<Document> Documents { get; set; }
     }
 }

@@ -10,6 +10,6 @@ namespace Flight_Document_V1.Entity
 
         public string LocationName { get; set; }
 
-        public virtual ICollection<Flight> Flights { get; set; }
+        //public virtual ICollection<Flight> Flights { get; set; }
     }
 }
