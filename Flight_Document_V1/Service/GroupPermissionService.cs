@@ -21,22 +21,6 @@ namespace Flight_Document_V1.Service
         {
 
             var list = await _context.GroupPermissions.ToListAsync();
-            /*foreach (var item in list)
-            {
-                string name;
-                switch (item.StatusPermission)
-                {
-                    case 1:
-                        name = "Read and Modify";
-                        break;
-                    case 2:
-                        name = "Read Only";
-                        break;
-                    case 3:
-                        name = "No Permission";
-                        break;
-                }
-            }*/
             return list;
 
         }

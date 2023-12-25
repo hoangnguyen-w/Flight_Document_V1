@@ -75,15 +75,17 @@ namespace Flight_Document_V1.Service
             _context.Documents.Add(document);
             await _context.SaveChangesAsync();
 
-            /*int searchID = _context.Documents.Select(d => d.DocumentID)
-                                             .Where(document.DocumentName == documentDTO.DocumentName);
+            var searchID = await _context.Documents
+                .Where(d => d.DocumentName == documentDTO.DocumentName)
+                .Select(d => d.DocumentID)              
+                .FirstOrDefaultAsync();
             History history = new History();
             history.DocumentID = searchID;
             history.HistoryDate = DateTime.Now;
             history.DocumentHistory = file.FileName;
 
             _context.Histories.Add(history);
-            await _context.SaveChangesAsync();*/
+            await _context.SaveChangesAsync();
 
         }
 
