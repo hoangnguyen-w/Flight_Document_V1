@@ -66,7 +66,7 @@ namespace Flight_Document_V1.Service
 
             document.DocumentName = documentDTO.DocumentName;
             document.Note = documentDTO.Note;
-            document.Version = 1.0;
+            document.Version = 1;
             document.DocumentFile = file.FileName;
             document.CreateDateDocument = DateTime.Now;
             document.DocumentTypeID = documentDTO.documentType;
@@ -102,9 +102,9 @@ namespace Flight_Document_V1.Service
             }
 
             var doc = await _context.Documents.FirstOrDefaultAsync(d => d.DocumentID == id);
-            //double SumVersion = RoundUpVersion(doc.Version);
-            //doc.Version = SumVersion;
-            doc.Version += 0.1;
+            float SumVersion = RoundUpVersion(doc.Version);
+            doc.Version = SumVersion;
+            //doc.Version += 0.1;
             doc.UpdateDateDocument = DateTime.Now;
             doc.DocumentFile = file.FileName;
 
@@ -126,18 +126,19 @@ namespace Flight_Document_V1.Service
         }
 
 
-        public double RoundUpVersion(double version)
+        public float RoundUpVersion(float version)
         {
-            // Kiểm tra phần thập phân, nếu lớn hơn hoặc bằng 0.10 thì làm tròn lên
-            if (version % 1.0 >= 0.9)
+            // Làm tròn lên nếu phần thập phân là 0.10
+            if (Math.Abs(version % 1.0 - 0.10) < float.Epsilon)
             {
-                return Math.Ceiling(version);
+                return (float)Math.Ceiling(version);
             }
             else
             {
-                return RoundUpVersion(version + 0.1);
+                return version + 0.1f;
             }
         }
+
 
         public async Task<(byte[], string, string)> DownloadFileDocument(int id)
         {

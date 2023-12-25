@@ -1,6 +1,7 @@
 ﻿using Flight_Document_V1.DTO;
 using Flight_Document_V1.Entity;
 using Flight_Document_V1.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 
@@ -8,6 +9,7 @@ namespace Flight_Document_V1.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin, Staff")]
     public class DocumentController : Controller
     {
         private readonly IDocumentService _documentService;

@@ -14,7 +14,7 @@ namespace Flight_Document_V1.Entity
         [MaxLength(100)]
         public string DocumentName { get; set; }
 
-        public double Version { get; set; }
+        public float Version { get; set; }
 
         public string Note { get; set; }
 
