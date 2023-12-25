@@ -17,7 +17,6 @@ namespace Flight_Document_V1.Service
 
         public async Task<List<Location>> GetAll()
         {
-
             var list = await _context.Locations.ToListAsync();
             return list;
 

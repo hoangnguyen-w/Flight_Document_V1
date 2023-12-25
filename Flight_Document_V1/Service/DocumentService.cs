@@ -109,7 +109,7 @@ namespace Flight_Document_V1.Service
             //doc.Version += 0.1;
             doc.UpdateDateDocument = DateTime.Now;
             doc.DocumentFile = file.FileName;
-
+            //Lưu lại history về những lần cập nhật
             History history = new History();
             history.DocumentID = id;
             history.HistoryDate = DateTime.Now;

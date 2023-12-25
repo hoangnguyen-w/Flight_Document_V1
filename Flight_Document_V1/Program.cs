@@ -75,6 +75,7 @@ builder.Services.AddScoped<IGroupPermissionService, GroupPermissionService>();
 builder.Services.AddScoped<IFlightService, FlightService>();
 builder.Services.AddScoped<ISettingService, SettingService>();
 builder.Services.AddScoped<IDocumentService, DocumentService>();
+builder.Services.AddScoped<IHistoryService, HistoryService>();
 
 var app = builder.Build();
 
